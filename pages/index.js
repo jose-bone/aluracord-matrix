@@ -32,7 +32,7 @@ function GlobalStyle() {
   );
 }
 
-function Titulo(props) {
+function Title(props) {
   const Tag = props.tag || "h1";
   return (
     <>
@@ -61,7 +61,7 @@ function Titulo(props) {
 // }
 // export default HomePage
 
-export default function PaginaInicial() {
+export default function HomePage() {
   const username = "jose-bone";
 
   return (
@@ -111,7 +111,7 @@ export default function PaginaInicial() {
               marginBottom: "32px",
             }}
           >
-            <Titulo tag="h2">Boas vindas de volta!</Titulo>
+            <Title tag="h2">Boas vindas de volta!</Title>
             <Text
               variant="body3"
               styleSheet={{
