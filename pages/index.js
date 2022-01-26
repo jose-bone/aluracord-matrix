@@ -3,37 +3,6 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import appConfig from "../config.json";
 
-function GlobalStyle() {
-  return (
-    <style global jsx>{`
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        list-style: none;
-      }
-      body {
-        font-family: "Open Sans", sans-serif;
-      }
-      /* App fit Height */
-      html,
-      body,
-      #__next {
-        min-height: 100vh;
-        display: flex;
-        flex: 1;
-      }
-      #__next {
-        flex: 1;
-      }
-      #__next > * {
-        flex: 1;
-      }
-      /* ./App fit Height */
-    `}</style>
-  );
-}
-
 function Title(props) {
   const Tag = props.tag || "h1";
   return (
@@ -56,12 +25,24 @@ export default function HomePage() {
   const roteamento = useRouter();
   const [githubUser, setGithubUser] = React.useState("");
 
-export default function HomePage() {
-  const username = "jose-bone";
+  useEffect(() => {
+    fetch(`https://api.github.com/users/${username}`)
+      .then((resposta) => {
+        if (!resposta.ok) {
+          throw Error("Não foi possível fazer a requisição");
+        }
+        return resposta.json();
+      })
+      .then((data) => {
+        setGithubUser(data);
+      })
+      .catch((erro) => {
+        console.log(erro.message);
+      });
+  });
 
   return (
     <>
-      <GlobalStyle />
       <Box
         styleSheet={{
           display: "flex",
