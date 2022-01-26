@@ -1,4 +1,6 @@
 import { Box, Button, Text, TextField, Image } from "@skynexui/components";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 import appConfig from "../config.json";
 
 function GlobalStyle() {
@@ -48,18 +50,11 @@ function Title(props) {
   );
 }
 
-// Componente React
-// function HomePage() {
-//     // JSX
-//     return (
-//         <div>
-//             <GlobalStyle />
-//             <Titulo tag="h2">Boas vindas de volta!</Titulo>
-//             <h2>Discord - Alura Matrix</h2>
-//         </div>
-//     )
-// }
-// export default HomePage
+export default function HomePage() {
+  // const username = "jose-bone";
+  const [username, setUsername] = React.useState("jose-bone");
+  const roteamento = useRouter();
+  const [githubUser, setGithubUser] = React.useState("");
 
 export default function HomePage() {
   const username = "jose-bone";
@@ -101,6 +96,11 @@ export default function HomePage() {
           {/* Formulário */}
           <Box
             as="form"
+            onSubmit={function (event) {
+              event.preventDefault();
+              // console.log("Clicou!");
+              roteamento.push("/chat");
+            }}
             styleSheet={{
               display: "flex",
               flexDirection: "column",
@@ -123,6 +123,14 @@ export default function HomePage() {
             </Text>
 
             <TextField
+              value={username}
+              onChange={function (event) {
+                // Onde está o valor?
+                const valor = event.target.value;
+                //Trocar o valor da variável
+                // através do React e avise quem precisa
+                setUsername(valor);
+              }}
               fullWidth
               textFieldColors={{
                 neutral: {

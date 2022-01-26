@@ -1,7 +1,7 @@
 import React from "react";
 import appConfig from "../config.json";
 
-function Titulo(props) {
+function Title(props) {
   const Tag = props.tag || "h1";
   const Color = props.color || "000";
   return (
@@ -17,4 +17,4 @@ function Titulo(props) {
     </>
   );
 }
-export default Titulo;
+export default Title;
