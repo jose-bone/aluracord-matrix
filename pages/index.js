@@ -1,6 +1,13 @@
-import { Box, Button, Text, TextField, Image } from "@skynexui/components";
+import {
+  Box,
+  Button,
+  Text,
+  TextField,
+  Image,
+  Icon,
+} from "@skynexui/components";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import appConfig from "../config.json";
 
 function Title(props) {
@@ -20,7 +27,6 @@ function Title(props) {
 }
 
 export default function HomePage() {
-  // const username = "jose-bone";
   const [username, setUsername] = React.useState("jose-bone");
   const roteamento = useRouter();
   const [githubUser, setGithubUser] = React.useState("");
@@ -39,7 +45,7 @@ export default function HomePage() {
       .catch((erro) => {
         console.log(erro.message);
       });
-  });
+  }, []);
 
   return (
     <>
@@ -72,6 +78,7 @@ export default function HomePage() {
             margin: "16px",
             boxShadow: "0 2px 10px 0 rgb(0 0 0 / 20%)",
             backgroundColor: appConfig.theme.colors.neutrals[700],
+            opacity: "0.94",
           }}
         >
           {/* Formulário */}
