@@ -171,7 +171,11 @@ export default function HomePage() {
                 borderRadius: "50%",
                 marginBottom: "16px",
               }}
-              src={`https://github.com/${username}.png`}
+              src={
+                username
+                  ? `https://github.com/${username}.png`
+                  : defaultImage.src
+              }
               alt="Imagem de Perfil"
             />
             <Text
