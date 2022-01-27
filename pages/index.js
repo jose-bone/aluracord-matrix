@@ -9,6 +9,7 @@ import {
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import appConfig from "../config.json";
+import defaultImage from "../public/matrix.png";
 
 function Title(props) {
   const Tag = props.tag || "h1";
@@ -27,7 +28,7 @@ function Title(props) {
 }
 
 export default function HomePage() {
-  const [username, setUsername] = React.useState("jose-bone");
+  const [username, setUsername] = React.useState("");
   const roteamento = useRouter();
   const [githubUser, setGithubUser] = React.useState("");
 
@@ -111,6 +112,7 @@ export default function HomePage() {
             </Text>
 
             <TextField
+              placeholder="Escreva seu username do GitHub"
               value={username}
               onChange={function (event) {
                 // Onde está o valor?
@@ -118,6 +120,11 @@ export default function HomePage() {
                 //Trocar o valor da variável
                 // através do React e avise quem precisa
                 setUsername(valor);
+                // username
+                //   ? fetch(`https://api.github.com/users/${username}`)
+                //       .then((response) => response.json())
+                //       .then((data) => setUsername(data.username))
+                //   : setUsername("");
               }}
               fullWidth
               textFieldColors={{
