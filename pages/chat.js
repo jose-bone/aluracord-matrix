@@ -118,10 +118,10 @@ export default function ChatPage() {
               />
             </Box>
           ) : (
-          <MessageList
-            messages={listedMessages}
-            setListedMessages={setListedMessages}
-          />
+            <MessageList
+              messages={listedMessages}
+              handleDeleteMessage={handleDeleteMessage}
+            />
           )}
 
           <Box
