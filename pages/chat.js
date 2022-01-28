@@ -4,10 +4,10 @@ import appConfig from "../config.json";
 import { createClient } from "@supabase/supabase-js";
 
 // Como fazer AJAX: https://medium.com/@omariosouto/entendendo-como-fazer-ajax-com-a-fetchapi-977ff20da3c6
-const SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzMzNTE5MCwiZXhwIjoxOTU4OTExMTkwfQ.5mW1pyLQmo4kpMbraMqkoUxLR6ommCa2ogxbWcTZ760";
-const SUPABASE_URL = "https://aidjtkygzshbphptmeqy.supabase.co";
-const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabaseClient = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLIC_KEY
+);
 
 export default function ChatPage() {
   const [message, setMessage] = React.useState("");
