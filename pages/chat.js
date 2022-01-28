@@ -45,6 +45,21 @@ export default function ChatPage() {
     setMessage("");
   }
 
+  function handleDeleteMessage(actualMessage) {
+    // excluir a mensagem primeiro no supabase e depois no useState
+    supabaseClient
+      .from("messages")
+      .delete()
+      .match({ id: actualMessage.id })
+      .then(({ data }) => {
+        // lista filtrada
+        const messagesListFiltered = listedMessages.filter((message) => {
+          return message.id != data[0].id;
+        });
+        setListedMessages(messagesListFiltered);
+      });
+  }
+
   return (
     <Box
       styleSheet={{
@@ -302,7 +317,7 @@ function MessageList(props) {
                 // quando clicar vai chamar a função de excluir a mensagem
                 onClick={(event) => {
                   event.preventDefault();
-                  removeMessage(message.id);
+                  handleDeleteMessage(message);
                 }}
               />
             </Box>
