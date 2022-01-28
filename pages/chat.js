@@ -285,6 +285,11 @@ function MessageList(props) {
                     borderRadius: "50%",
                     display: "inline-block",
                     marginRight: "8px",
+                    hover: {
+                      transform: "scale(2.5)",
+                      marginLeft: "20px",
+                      marginRight: "20px",
+                    },
                   }}
                   src={`https://github.com/${message.from}.png`}
                   alt="Foto de Perfil"
