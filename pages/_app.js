@@ -47,6 +47,11 @@ export default function MyApp({ Component, pageProps }) {
           property="og:url"
           content="https://aluracord-jose-bone.vercel.app"
         />
+        <meta
+          property="og:image"
+          itemProp="image"
+          content="../public/preview.png"
+        />
         <link rel="shortcut icon" href="/favicon.png" />
       </Head>
       <Component {...pageProps} />;
