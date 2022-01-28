@@ -38,16 +38,13 @@ export default function ChatPage() {
 
   function handleNewMessage(newMessage) {
     const message = {
-      from: { username },
+      from: username,
       text: newMessage,
     };
 
     supabaseClient
       .from("messages")
-      .insert([
-        // Tem que ser um objeto com os MESMOS CAMPOS que você escreveu no supabase
-        message,
-      ])
+      .insert([message])
       .then(({ data }) => {
         console.log("Criando mensagem: ", data);
         setListedMessages([data[0], ...listedMessages]);
@@ -243,7 +240,8 @@ function MessageList(props) {
     <Box
       tag="ul"
       styleSheet={{
-        overflow: "auto",
+        overflow: "scroll",
+        overflowX: "hidden",
         display: "flex",
         flexDirection: "column-reverse",
         flex: 1,
@@ -297,7 +295,7 @@ function MessageList(props) {
                     },
                   }}
                   src={`https://github.com/${message.from}.png`}
-                  alt="Foto de Perfil"
+                  alt=""
                 />
                 <Text tag="strong">{message.from}</Text>
                 <Text

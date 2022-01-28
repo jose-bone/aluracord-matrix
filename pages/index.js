@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Box, Button, Text, TextField, Image } from "@skynexui/components";
 import { useRouter } from "next/router";
 import appConfig from "../config.json";
-import defaultImage from "../public/matrix.png";
 
 function Title(props) {
   const Tag = props.tag || "h1";
@@ -21,25 +20,14 @@ function Title(props) {
 }
 
 export default function HomePage() {
-  const [username, setUsername] = React.useState("");
-  const roteamento = useRouter();
-  const [githubUser, setGithubUser] = React.useState("");
+  const gitURL = "https://github.com/";
+  const apiGithub = "https://api.github.com/users/";
 
-  useEffect(() => {
-    fetch(username ? `https://api.github.com/users/${username}` : "")
-      .then((resposta) => {
-        if (!resposta.ok) {
-          throw Error("Não foi possível fazer a requisição");
-        }
-        return resposta.json();
-      })
-      .then((data) => {
-        setGithubUser(data);
-      })
-      .catch((erro) => {
-        console.log(erro.message);
-      });
-  }, []);
+  const [username, setUsername] = React.useState("");
+  const [userImg, setUserImg] = React.useState(`${gitURL}github.png`);
+  // const para nome abaixo da foto
+  const [nameImg, setNameImg] = React.useState("GitHub");
+  const roteamento = useRouter();
 
   return (
     <>
@@ -78,7 +66,7 @@ export default function HomePage() {
           {/* Formulário */}
           <Box
             as="form"
-            onSubmit={function (event) {
+            onSubmit={(event) => {
               event.preventDefault();
               // console.log("Clicou!");
               roteamento.push(`/chat?username=${username}`);
@@ -106,14 +94,6 @@ export default function HomePage() {
 
             <TextField
               placeholder="Escreva seu username do GitHub"
-              value={username}
-              onChange={function (event) {
-                // Onde está o valor?
-                const valor = event.target.value;
-                //Trocar o valor da variável
-                // através do e avise quem precisa
-                setUsername(valor);
-              }}
               fullWidth
               textFieldColors={{
                 neutral: {
@@ -137,7 +117,7 @@ export default function HomePage() {
                       setUsername(valor);
                       setNameImg(valor);
                       // Trocar o valor do userImg
-                      setUserImg(`${gitURL}.png`);
+                      setUserImg(`${gitURL}${valor}.png`);
                     } else if (retorno.status === 404) {
                       setNameImg("User não existe");
                       setUserImg(
@@ -183,12 +163,8 @@ export default function HomePage() {
                 borderRadius: "50%",
                 marginBottom: "16px",
               }}
-              src={
-                username
-                  ? `https://github.com/${username}.png`
-                  : defaultImage.src
-              }
-              alt="Imagem de Perfil"
+              src={userImg}
+              alt=""
             />
             <Text
               variant="body4"
@@ -199,7 +175,7 @@ export default function HomePage() {
                 borderRadius: "1000px",
               }}
             >
-              {username}
+              {nameImg}
             </Text>
           </Box>
           {/* Photo Area */}
