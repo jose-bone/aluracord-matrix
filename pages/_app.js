@@ -38,19 +38,14 @@ export default function MyApp({ Component, pageProps }) {
       <Head>
         <title>Aluracord - Matrix</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta property="og:title" content="Aluracord" key="title" />
+        <meta property="og:title" content="Aluracord - Matrix" key="title" />
         <meta
           property="og:description"
-          content="Entre em um chat para conversar."
+          content="Entre em um chat para conversar"
         />
         <meta
           property="og:url"
           content="https://aluracord-jose-bone.vercel.app"
-        />
-        <meta
-          property="og:image"
-          itemProp="image"
-          content="https://cdn-icons-png.flaticon.com/512/3815/3815182.png"
         />
         <link rel="shortcut icon" href="/favicon.png" />
       </Head>

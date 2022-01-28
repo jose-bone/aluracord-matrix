@@ -1,13 +1,6 @@
-import {
-  Box,
-  Button,
-  Text,
-  TextField,
-  Image,
-  Icon,
-} from "@skynexui/components";
+import React, { useEffect } from "react";
+import { Box, Button, Text, TextField, Image } from "@skynexui/components";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
 import appConfig from "../config.json";
 import defaultImage from "../public/matrix.png";
 
@@ -33,7 +26,7 @@ export default function HomePage() {
   const [githubUser, setGithubUser] = React.useState("");
 
   useEffect(() => {
-    fetch(`https://api.github.com/users/${username}`)
+    fetch(username ? `https://api.github.com/users/${username}` : "")
       .then((resposta) => {
         if (!resposta.ok) {
           throw Error("Não foi possível fazer a requisição");
@@ -118,13 +111,8 @@ export default function HomePage() {
                 // Onde está o valor?
                 const valor = event.target.value;
                 //Trocar o valor da variável
-                // através do React e avise quem precisa
+                // através do e avise quem precisa
                 setUsername(valor);
-                // username
-                //   ? fetch(`https://api.github.com/users/${username}`)
-                //       .then((response) => response.json())
-                //       .then((data) => setUsername(data.username))
-                //   : setUsername("");
               }}
               fullWidth
               textFieldColors={{

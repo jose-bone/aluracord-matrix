@@ -1,5 +1,5 @@
-import { Box, Text, TextField, Image, Button } from "@skynexui/components";
 import React from "react";
+import { Box, Text, TextField, Image, Button } from "@skynexui/components";
 import appConfig from "../config.json";
 import { createClient } from "@supabase/supabase-js";
 
@@ -25,16 +25,11 @@ export default function ChatPage() {
   }, []);
 
   function handleNewMessage(newMessage) {
-    if (newMessage.length >= 1) {
     const message = {
       // id: listedMessages.length + 1,
       from: "jose-bone",
       text: newMessage,
     };
-      setListedMessages([message, ...listedMessages]);
-      setMessage("");
-    }
-  }
 
     supabaseClient
       .from("messages")
@@ -76,7 +71,7 @@ export default function ChatPage() {
           height: "100%",
           maxWidth: "95%",
           maxHeight: "95vh",
-          padding: { xs: "8px", md: "32px" },
+          padding: "32px",
         }}
       >
         <Header />
@@ -89,7 +84,7 @@ export default function ChatPage() {
             backgroundColor: appConfig.theme.colors.neutrals[600],
             flexDirection: "column",
             borderRadius: "5px",
-            padding: { xs: "8px", md: "24px" },
+            padding: "16px",
           }}
         >
           <MessageList
@@ -102,6 +97,7 @@ export default function ChatPage() {
             styleSheet={{
               display: "flex",
               alignItems: "center",
+              justifyContent: "space-between",
             }}
           >
             <TextField
@@ -124,7 +120,7 @@ export default function ChatPage() {
                 borderRadius: "5px",
                 padding: "6px 8px",
                 backgroundColor: appConfig.theme.colors.neutrals[800],
-                marginRight: { xs: "8px", md: "16px" },
+                marginRight: "12px",
                 color: appConfig.theme.colors.neutrals[200],
               }}
             />
@@ -202,8 +198,25 @@ function MessageList(props) {
     const removedMessage = props.messages.filter(
       (message) => id !== message.id
     );
-    //console.log(mensagemRemovida) ta saindo o novo array com valores excluidos
+    //console.log(mensagemRemovida) ta saindo o novo array com valores excluídos
     props.setListedMessages(removedMessage);
+
+    // function handleDeleteMessage(event) {
+    //   const messageId = Number(event.target.dataset.id);
+    //   console.log(messageId);
+
+    //   supabaseClient
+    //     .from("messages")
+    //     .delete()
+    //     .match({ id: messageId })
+    //     .then(({ data }) => {
+    //       const messageListFiltered = messageList.filter((messageFiltered) => {
+    //         return messageFiltered.id != data[0].id;
+    //       });
+
+    //       setMessageList(messageListFiltered);
+    //     });
+    // }
   }
 
   return (
@@ -235,6 +248,7 @@ function MessageList(props) {
             <Box
               styleSheet={{
                 marginBottom: "8px",
+                position: "relative",
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
@@ -257,8 +271,8 @@ function MessageList(props) {
                     display: "inline-block",
                     marginRight: "8px",
                   }}
-                  src={`https://github.com/jose-bone.png`}
-                  alt="Perfil do Usuário"
+                  src={`https://github.com/${message.from}.png`}
+                  alt="Foto de Perfil"
                 />
                 <Text tag="strong">{message.from}</Text>
                 <Text
