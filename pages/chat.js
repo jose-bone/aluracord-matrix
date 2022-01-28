@@ -200,23 +200,6 @@ function MessageList(props) {
     );
     //console.log(mensagemRemovida) ta saindo o novo array com valores excluídos
     props.setListedMessages(removedMessage);
-
-    // function handleDeleteMessage(event) {
-    //   const messageId = Number(event.target.dataset.id);
-    //   console.log(messageId);
-
-    //   supabaseClient
-    //     .from("messages")
-    //     .delete()
-    //     .match({ id: messageId })
-    //     .then(({ data }) => {
-    //       const messageListFiltered = messageList.filter((messageFiltered) => {
-    //         return messageFiltered.id != data[0].id;
-    //       });
-
-    //       setMessageList(messageListFiltered);
-    //     });
-    // }
   }
 
   return (
