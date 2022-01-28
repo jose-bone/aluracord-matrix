@@ -102,10 +102,27 @@ export default function ChatPage() {
             padding: "16px",
           }}
         >
+          {loading ? (
+            <Box
+              styleSheet={{
+                position: "relative",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "100%",
+              }}
+            >
+              <ThreeDots
+                fill={appConfig.theme.colors.neutrals[800]}
+                height="16px"
+              />
+            </Box>
+          ) : (
           <MessageList
             messages={listedMessages}
             setListedMessages={setListedMessages}
           />
+          )}
 
           <Box
             as="form"
