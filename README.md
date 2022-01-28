@@ -54,7 +54,7 @@ $ yarn dev
 ## 💻 Project
 
 Project developed during Alura's React Immersions with the purpose to learn ReactJs and NextJs and improve my knowledge - check it out clicking the link bellow
-<ttps://aluracord-jose-bone.vercel.app>
+<https://aluracord-jose-bone.vercel.app>
 
 This project is being developed during Alura's "Imersão React"
 [@alura](https://github.com/alura)
