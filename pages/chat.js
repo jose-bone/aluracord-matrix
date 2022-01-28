@@ -38,7 +38,7 @@ export default function ChatPage() {
 
   function handleNewMessage(newMessage) {
     const message = {
-      from: "jose-bone",
+      from: { username },
       text: newMessage,
     };
 
