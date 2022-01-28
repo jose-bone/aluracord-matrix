@@ -257,6 +257,7 @@ function MessageList(props) {
                   borderRadius: "25%",
                   width: "15px",
                   marginLeft: "15px",
+                  color: "#FF4760",
                 }}
                 variant="tertiary"
                 colorVariant="dark"
@@ -266,7 +267,7 @@ function MessageList(props) {
                     width="14"
                     height="14"
                     viewBox="0 0 24 24"
-                    fill="none"
+                    fill="currentColor"
                     stroke="currentColor"
                     strokeWidth="1"
                     strokeLinecap="round"
