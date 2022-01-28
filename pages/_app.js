@@ -50,7 +50,7 @@ export default function MyApp({ Component, pageProps }) {
         <meta
           property="og:image"
           itemProp="image"
-          content="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/452/external-matrix-infographic-elements-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png"
+          content="https://cdn-icons-png.flaticon.com/512/3815/3815182.png"
         />
         <link rel="shortcut icon" href="/favicon.png" />
       </Head>
