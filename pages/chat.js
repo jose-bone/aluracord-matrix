@@ -2,6 +2,8 @@ import React from "react";
 import { Box, Text, TextField, Image, Button } from "@skynexui/components";
 import appConfig from "../config.json";
 import { createClient } from "@supabase/supabase-js";
+import { ThreeDots } from "react-loading-icons";
+import { useRouter } from "next/router";
 
 // Como fazer AJAX: https://medium.com/@omariosouto/entendendo-como-fazer-ajax-com-a-fetchapi-977ff20da3c6
 const supabaseClient = createClient(
@@ -10,6 +12,10 @@ const supabaseClient = createClient(
 );
 
 export default function ChatPage() {
+  // passar para conseguir pegar o nome do user que fez o login
+  const router = useRouter();
+  const { username } = router.query;
+
   const [message, setMessage] = React.useState("");
   const [listedMessages, setListedMessages] = React.useState([]);
 
@@ -32,7 +38,6 @@ export default function ChatPage() {
 
   function handleNewMessage(newMessage) {
     const message = {
-      // id: listedMessages.length + 1,
       from: "jose-bone",
       text: newMessage,
     };
@@ -231,14 +236,7 @@ function Header() {
 }
 
 function MessageList(props) {
-  function removeMessage(id) {
-    //console.log(id) ta saindo o id que eu clico
-    const removedMessage = props.messages.filter(
-      (message) => id !== message.id
-    );
-    //console.log(mensagemRemovida) ta saindo o novo array com valores excluídos
-    props.setListedMessages(removedMessage);
-  }
+  const handleDeleteMessage = props.handleDeleteMessage;
 
   return (
     <Box

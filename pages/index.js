@@ -81,7 +81,7 @@ export default function HomePage() {
             onSubmit={function (event) {
               event.preventDefault();
               // console.log("Clicou!");
-              roteamento.push("/chat");
+              roteamento.push(`/chat?username=${username}`);
             }}
             styleSheet={{
               display: "flex",
