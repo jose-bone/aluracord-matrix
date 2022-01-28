@@ -93,7 +93,7 @@ export default function ChatPage() {
           boxShadow: "0 2px 10px 0 rgb(0 0 0 / 20%)",
           borderRadius: "5px",
           backgroundColor: appConfig.theme.colors.neutrals[700],
-          opacity: "0.9",
+          opacity: "0.92",
           height: "100%",
           maxWidth: "95%",
           maxHeight: "95vh",
@@ -146,7 +146,8 @@ export default function ChatPage() {
             <TextField
               value={message}
               onChange={(event) => {
-                setMessage(event.target.value);
+                const valor = event.target.value;
+                setMessage(valor);
               }}
               onKeyPress={(event) => {
                 if (event.key === "Enter") {
