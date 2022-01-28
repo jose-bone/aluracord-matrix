@@ -13,6 +13,9 @@ export default function ChatPage() {
   const [message, setMessage] = React.useState("");
   const [listedMessages, setListedMessages] = React.useState([]);
 
+  // useState para o loading
+  const [loading, setLoading] = React.useState(true);
+
   React.useEffect(() => {
     supabaseClient
       .from("messages")
@@ -20,7 +23,10 @@ export default function ChatPage() {
       .order("id", { ascending: false })
       .then(({ data }) => {
         console.log("Dados da consulta: ", data);
-        setListedMessages(data);
+        if (data != null) {
+          setListedMessages(data);
+        }
+        setLoading(false);
       });
   }, []);
 
