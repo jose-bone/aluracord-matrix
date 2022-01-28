@@ -1,32 +1,53 @@
 import { Box, Text, TextField, Image, Button } from "@skynexui/components";
 import React from "react";
 import appConfig from "../config.json";
+import { createClient } from "@supabase/supabase-js";
+
+// Como fazer AJAX: https://medium.com/@omariosouto/entendendo-como-fazer-ajax-com-a-fetchapi-977ff20da3c6
+const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzMzNTE5MCwiZXhwIjoxOTU4OTExMTkwfQ.5mW1pyLQmo4kpMbraMqkoUxLR6ommCa2ogxbWcTZ760";
+const SUPABASE_URL = "https://aidjtkygzshbphptmeqy.supabase.co";
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 export default function ChatPage() {
   const [message, setMessage] = React.useState("");
   const [listedMessages, setListedMessages] = React.useState([]);
 
+  React.useEffect(() => {
+    supabaseClient
+      .from("messages")
+      .select("*")
+      .order("id", { ascending: false })
+      .then(({ data }) => {
+        console.log("Dados da consulta: ", data);
+        setListedMessages(data);
+      });
+  }, []);
+
   function handleNewMessage(newMessage) {
     if (newMessage.length >= 1) {
-      const message = {
-        id: listedMessages.length + 1,
-        from: "jose-bone",
-        text: newMessage,
-      };
+    const message = {
+      // id: listedMessages.length + 1,
+      from: "jose-bone",
+      text: newMessage,
+    };
       setListedMessages([message, ...listedMessages]);
       setMessage("");
     }
   }
 
-  // função para deletar mensagem da lista
-  function handleDeleteMessage(actualMessage) {
-    // id da msg
-    const id = actualMessage.id;
-    // lista filtrada
-    const messagesListFiltered = listedMessages.filter((message) => {
-      return message.id != id;
-    });
-    setListedMessages(messagesListFiltered);
+    supabaseClient
+      .from("messages")
+      .insert([
+        // Tem que ser um objeto com os MESMOS CAMPOS que você escreveu no supabase
+        message,
+      ])
+      .then(({ data }) => {
+        console.log("Criando mensagem: ", data);
+        setListedMessages([data[0], ...listedMessages]);
+      });
+
+    setMessage("");
   }
 
   return (
