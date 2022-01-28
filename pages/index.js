@@ -123,6 +123,30 @@ export default function HomePage() {
                   backgroundColor: appConfig.theme.colors.neutrals[800],
                 },
               }}
+              onChange={(event) => {
+                // Onde está o valor?
+                const valor = event.target.value;
+
+                // validar se existe o usuário e pegar a sua foto
+                fetch(`${apiGithub}${valor}`, { method: "GET" }).then(
+                  (retorno) => {
+                    // se existir vai pegar a foto e por o nome no username
+                    if (retorno.status === 200) {
+                      console.log("user existe 200");
+                      // Trocar o valor da username
+                      setUsername(valor);
+                      setNameImg(valor);
+                      // Trocar o valor do userImg
+                      setUserImg(`${gitURL}.png`);
+                    } else if (retorno.status === 404) {
+                      setNameImg("User não existe");
+                      setUserImg(
+                        `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4tBbzVZlIvgshAFiNpeCsuFW-UE3dZpnIxQ&usqp=CAU`
+                      );
+                    }
+                  }
+                );
+              }}
             />
             <Button
               type="submit"
