@@ -29,6 +29,7 @@ This project was developed using the following technologies:
 
 - [React](https://reactjs.org)
 - [JavaScript](https://www.javascript.com)
+- [NextJS](https://nextjs.org)
 - [SkynexUI](https://skynexui.dev)
 - [Supabase](https://app.supabase.io/)
 - [Emotion](https://emotion.sh/docs/introduction)
