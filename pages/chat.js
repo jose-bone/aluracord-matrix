@@ -11,6 +11,15 @@ const supabaseClient = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_PUBLIC_KEY
 );
 
+function listenMessageInRealTime(addNewMessage) {
+  return supabaseClient
+    .from("messages")
+    .on("INSERT", (replyLive) => {
+      addNewMessage(replyLive.new);
+    })
+    .subscribe();
+}
+
 export default function ChatPage() {
   // passar para conseguir pegar o nome do user que fez o login
   const router = useRouter();
@@ -51,13 +60,7 @@ export default function ChatPage() {
       text: newMessage,
     };
 
-    supabaseClient
-      .from("messages")
-      .insert([message])
-      .then(({ data }) => {
-        console.log("Criando mensagem: ", data);
-        setListedMessages([data[0], ...listedMessages]);
-      });
+    supabaseClient.from("messages").insert([message]).then();
 
     setMessage("");
   }
@@ -158,7 +161,10 @@ export default function ChatPage() {
               onKeyPress={(event) => {
                 if (event.key === "Enter") {
                   event.preventDefault();
-                  handleNewMessage(message);
+                  if (message != "") {
+                    // função pra enviar a msg
+                    handleNewMessage(message);
+                  }
                 }
               }}
               placeholder="Insira sua mensagem aqui..."
@@ -209,11 +215,10 @@ export default function ChatPage() {
               styleSheet={{
                 borderRadius: "5px",
               }}
-              onClick={(event) => {
-                // retirar o comportamento padrão do enter (quebrar uma linha)
-                event.preventDefault();
-                // função pra enviar a msg
-                handleNewMessage(message);
+              onClick={() => {
+                message.length > 0
+                  ? handleNewMessage(message)
+                  : alert("Sua mensagem não pode ser vazia!!");
               }}
             />
           </Box>
