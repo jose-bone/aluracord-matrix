@@ -34,6 +34,15 @@ export default function ChatPage() {
         }
         setLoading(false);
       });
+
+    listenMessageInRealTime((newMessage) => {
+      // ele que seta a nova mensagem na lista do use state
+      // pega so a nova mensagem e insere na lista
+      setListedMessages((valorAtualLista) => {
+        // se não for com a função, ele não pega o valor atualizado da lista
+        return [newMessage, ...valorAtualLista];
+      });
+    });
   }, []);
 
   function handleNewMessage(newMessage) {
@@ -163,6 +172,11 @@ export default function ChatPage() {
                 backgroundColor: appConfig.theme.colors.neutrals[800],
                 marginRight: "12px",
                 color: appConfig.theme.colors.neutrals[200],
+              }}
+            />
+            <ButtonSendSticker
+              onStickerClick={(sticker) => {
+                handleNewMessage(`:sticker: ${sticker}`);
               }}
             />
             <Button
@@ -346,7 +360,17 @@ function MessageList(props) {
                 }}
               />
             </Box>
-            {message.text}
+            {message.text.startsWith(":sticker:") ? (
+              <Image
+                src={message.text.replace(":sticker:", "")}
+                alt=""
+                styleSheet={{
+                  width: "120px",
+                }}
+              />
+            ) : (
+              message.text
+            )}
           </Text>
         );
       })}
