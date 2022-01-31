@@ -4,6 +4,7 @@ import appConfig from "../config.json";
 import { createClient } from "@supabase/supabase-js";
 import { ThreeDots } from "react-loading-icons";
 import { useRouter } from "next/router";
+import { ButtonSendSticker } from "../src/components/ButtonSendStickers";
 
 // Como fazer AJAX: https://medium.com/@omariosouto/entendendo-como-fazer-ajax-com-a-fetchapi-977ff20da3c6
 const supabaseClient = createClient(
@@ -37,7 +38,7 @@ export default function ChatPage() {
       .select("*")
       .order("id", { ascending: false })
       .then(({ data }) => {
-        console.log("Dados da consulta: ", data);
+        // console.log("Dados da consulta: ", data);
         if (data != null) {
           setListedMessages(data);
         }

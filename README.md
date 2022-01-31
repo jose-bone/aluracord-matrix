@@ -1,7 +1,7 @@
-# 💻 Aluracord - Matrix (In Development)
+# 💻 Aluracord - Matrix (In Development) 🛠
 
 <h1 align="center">
-    <img alt="Aluracord - Matrix" title="Aluracod -Matrix" src="./public/capa.png" />
+    <img alt="Aluracord - Matrix" title="Aluracord -Matrix" src="./public/capa.png" />
 </h1>
 
 <p align="center">

@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Button, Text, TextField, Image } from "@skynexui/components";
 import { useRouter } from "next/router";
 import appConfig from "../config.json";
+import { gitURL, apiGithub } from "../src/services/api";
 
 function Title(props) {
   const Tag = props.tag || "h1";
@@ -25,6 +26,7 @@ export default function HomePage() {
 
   const [username, setUsername] = React.useState("");
   const [userImg, setUserImg] = React.useState(`${gitURL}github.png`);
+  const roteamento = useRouter();
   // const para nome abaixo da foto
   const [nameImg, setNameImg] = React.useState("GitHub");
   const roteamento = useRouter();
@@ -112,17 +114,19 @@ export default function HomePage() {
                   (retorno) => {
                     // se existir vai pegar a foto e por o nome no username
                     if (retorno.status === 200) {
-                      console.log("user existe 200");
+                      // console.log("user existe 200");
                       // Trocar o valor da username
                       setUsername(valor);
                       setNameImg(valor);
                       // Trocar o valor do userImg
                       setUserImg(`${gitURL}${valor}.png`);
+                      setUserValido(true);
                     } else if (retorno.status === 404) {
                       setNameImg("User não existe");
                       setUserImg(
                         `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4tBbzVZlIvgshAFiNpeCsuFW-UE3dZpnIxQ&usqp=CAU`
                       );
+                      setUserValido(false);
                     }
                   }
                 );
@@ -138,6 +142,7 @@ export default function HomePage() {
                 mainColorLight: appConfig.theme.colors.primary[400],
                 mainColorStrong: appConfig.theme.colors.primary[600],
               }}
+              disabled={!userValido}
             />
           </Box>
           {/* Formulário */}
