@@ -6,7 +6,6 @@ import { ThreeDots } from "react-loading-icons";
 import { useRouter } from "next/router";
 import { ButtonSendSticker } from "../src/components/ButtonSendStickers";
 
-// Como fazer AJAX: https://medium.com/@omariosouto/entendendo-como-fazer-ajax-com-a-fetchapi-977ff20da3c6
 const supabaseClient = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_PUBLIC_KEY

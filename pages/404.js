@@ -1,6 +1,6 @@
-import { Box, Image, Text } from "@skynexui/components";
+import { Box, Image } from "@skynexui/components";
 import appConfig from "../config.json";
-import Title from "../components";
+import Title from "../src/components";
 
 export default function PageNotFound() {
   return (
@@ -17,10 +17,10 @@ export default function PageNotFound() {
           backgroundBlendMode: "multiply",
         }}
       >
-        <Image src="/matrix.png" alt="Imagem de Matrix" />
-        <Title tag="h1" color="800">
-          404... Chat Errado!
-        </Title>
+        <Image src="/404.gif" alt="Page Not Found" />
+        {/* <Title tag="h1" color="800">
+          404... Not Found!!
+        </Title> */}
       </Box>
     </>
   );
