@@ -21,15 +21,25 @@ function Title(props) {
 }
 
 export default function HomePage() {
-  const gitURL = "https://github.com/";
-  const apiGithub = "https://api.github.com/users/";
-
   const [username, setUsername] = React.useState("");
   const [userImg, setUserImg] = React.useState(`${gitURL}github.png`);
   const roteamento = useRouter();
   // const para nome abaixo da foto
   const [nameImg, setNameImg] = React.useState("GitHub");
-  const roteamento = useRouter();
+  // estado para permitir clicar no botão
+  const [userValido, setUserValido] = React.useState(false);
+
+  const [userLocation, setUserLocation] = React.useState();
+  const imgError =
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4tBbzVZlIvgshAFiNpeCsuFW-UE3dZpnIxQ&usqp=CAU";
+
+  fetch(`https://api.github.com/users/${username}`)
+    .then((response) => response.json())
+    .then((data) => {
+      setUserLocation(data.location);
+      //setUser(data);
+      console.log(data);
+    });
 
   return (
     <>
@@ -168,7 +178,11 @@ export default function HomePage() {
                 borderRadius: "50%",
                 marginBottom: "16px",
               }}
-              src={userImg}
+              src={
+                username.length > 2
+                  ? `https://github.com/${username}.png`
+                  : imgError
+              }
               alt=""
             />
             <Text
@@ -180,7 +194,19 @@ export default function HomePage() {
                 borderRadius: "1000px",
               }}
             >
-              {nameImg}
+              {username.length < 2 ? "Check again your username" : username}
+            </Text>
+
+            <Text
+              variant="body4"
+              styleSheet={{
+                color: appConfig.theme.colors.neutrals[200],
+                backgroundColor: appConfig.theme.colors.neutrals[900],
+                padding: "3px 10px",
+                borderRadius: "1000px",
+              }}
+            >
+              {username.length > 2 ? userLocation : "----"}
             </Text>
           </Box>
           {/* Photo Area */}
