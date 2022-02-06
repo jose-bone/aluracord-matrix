@@ -1,4 +1,4 @@
-# 💻 Aluracord - Matrix (In Development) 🛠
+# 💻 Aluracord - Matrix 
 
 <h1 align="center">
     <img alt="Aluracord - Matrix" title="Aluracord -Matrix" src="./public/capa.png" />
@@ -64,7 +64,7 @@ This project is being developed during Alura's "Imersão React"
 
 ## 🧪 Preview
 
-![gif](/public/preview.gif)
+https://user-images.githubusercontent.com/79787418/152705352-00693c87-84a0-4730-98c2-ca8c93df4415.mp4
 
 ## 🔖 Layout
 
