@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # 💻 Aluracord - Matrix
+=======
+# 💻 Aluracord - Matrix 
+>>>>>>> 4e6c4e0895bcd2baba6ab6e03cdacf36e78468ba
 
 <h1 align="center">
     <img alt="Aluracord - Matrix" title="Aluracord -Matrix" src="./public/capa.png" />
